@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Join Us</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="signup-container">
+        <form id="signupForm">
+            <h2>Create Account</h2>
+            <p class="subtitle">Join our community today.</p>
+            
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Enter username">
+                <span class="error-message" id="usernameError">Username is required</span>
+            </div>
+
+            <div class="input-group">
+                <label for="email">moni</label>
+                <input type="text" id="email" placeholder="email@example.com">
+                <span class="error-message" id="emailError">Please enter a valid email</span>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Min. 8 characters">
+                <span class="error-message" id="passwordError">Password must be at least 8 characters</span>
+            </div>
+
+            <button type="submit" class="signup-btn">Sign Up</button>
+            
+            <p class="footer-text">Already have an account? <a href="#">Log in</a></p>
+        </form>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>
