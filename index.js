@@ -1,7 +1,8 @@
       /* --- JAVASCRIPT LOGIC --- */
         const form = document.getElementById('signupForm');
+        const API_URL = 'http://localhost:3000/api/users';
         
-        form.addEventListener('submit', function(event) {
+        form.addEventListener('submit', async function(event) {
             event.preventDefault(); // Stop the page from refreshing
 
             // Get the input values
@@ -41,10 +42,53 @@
                 hideError(password, passwordErr);
             }
 
-            // Final check
+            // Final check - Send to MongoDB
             if (isFormValid) {
-                alert("Success! Form is valid and ready to be sent to a database.");
-                // You can clear the form here if you want: form.reset();
+                try {
+                    // Disable submit button
+                    const submitBtn = form.querySelector('.signup-btn');
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'Signing Up...';
+
+                    // Send data to backend
+                    const response = await fetch(API_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            username: username.value.trim(),
+                            email: email.value.trim(),
+                            password: password.value
+                        })
+                    });
+
+                    const data = await response.json();
+
+                    if (data.success) {
+                        alert("✅ Success! Your account has been created and saved to the database.");
+                        form.reset();
+                        // Redirect to users page after a short delay
+                        setTimeout(() => {
+                            window.location.href = 'users.html';
+                        }, 1000);
+                    } else {
+                        alert("❌ Error: " + data.message);
+                    }
+
+                    // Re-enable button
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Sign Up';
+
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert("❌ Failed to connect to server. Make sure the server is running on port 3000.");
+                    
+                    // Re-enable button
+                    const submitBtn = form.querySelector('.signup-btn');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Sign Up';
+                }
             }
         });
 
