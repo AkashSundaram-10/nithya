@@ -88,6 +88,50 @@ app.post('/api/users', async (req, res) => {
     }
 });
 
+// Login user
+app.post('/api/login', async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        // Find user by email
+        const user = await User.findOne({ email: email.toLowerCase() });
+        
+        if (!user) {
+            return res.status(401).json({ 
+                success: false, 
+                message: 'Invalid email or password' 
+            });
+        }
+
+        // Check password (Note: In production, use bcrypt.compare())
+        if (user.password !== password) {
+            return res.status(401).json({ 
+                success: false, 
+                message: 'Invalid email or password' 
+            });
+        }
+
+        // Login successful
+        res.json({ 
+            success: true, 
+            message: 'Login successful',
+            user: {
+                id: user._id,
+                username: user.username,
+                email: user.email,
+                createdAt: user.createdAt
+            }
+        });
+    } catch (error) {
+        console.error('Error logging in:', error);
+        res.status(500).json({ 
+            success: false, 
+            message: 'Error logging in',
+            error: error.message 
+        });
+    }
+});
+
 // Get all users
 app.get('/api/users', async (req, res) => {
     try {

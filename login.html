@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Welcome Back</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="signup-container">
+        <form id="loginForm">
+            <h2>Welcome Back</h2>
+            <p class="subtitle">Login to your account</p>
+            
+            <div class="input-group">
+                <label for="loginEmail">Email</label>
+                <input type="text" id="loginEmail" placeholder="email@example.com">
+                <span class="error-message" id="emailError">Please enter a valid email</span>
+            </div>
+
+            <div class="input-group">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" placeholder="Enter your password">
+                <span class="error-message" id="passwordError">Password is required</span>
+            </div>
+
+            <button type="submit" class="signup-btn">Log In</button>
+            
+            <p class="footer-text">Don't have an account? <a href="index.html">Sign up</a></p>
+            <p class="footer-text"><a href="users.html">View All Registered Users →</a></p>
+        </form>
+    </div>
+    <script src="login.js"></script>
+</body>
+</html>
